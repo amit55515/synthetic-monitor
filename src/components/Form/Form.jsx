@@ -5,7 +5,6 @@ import {
 } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import Header from './Header';
-import { useEffect } from 'react';
 
 function Form (props) {
       const [URL, setURL] = useState('');
@@ -24,10 +23,10 @@ function Form (props) {
 
     const handleClick = () => {
       const formObject = {};
+      formObject.id = props.renderList[props.renderList.length-1].id + 1;
       formObject.endPoint = URL;
       formObject.params = param1;
       formObject.headers = h1;
-      // console.log(formObject);
       const List = props.renderList;
       List.push(formObject);
       props.setList(List);
@@ -42,10 +41,13 @@ function Form (props) {
           <div
             style={{ margin: '0.5em' }}
           >
+            <label style={{ margin: '0.5em' }}> endPoint id - {props.renderList[props.renderList.length-1].id + 1}</label>
             <div
               style={{ margin: '.5em' }}
             >
-              <FormControl>
+              <FormControl
+                style={{minWidth: "500px"}}
+              >
                 <TextField
                     placeholder="end point"
                     id="demo-simple-select"
@@ -61,10 +63,11 @@ function Form (props) {
                 label="Param 1"
                 handleChange={handleParam1}
                 value={param1}
+                style={{minWidth: "500px"}}
               />
             </div>
-            <Header h1={h1} rerenderParentCallback={rerenderParentCallback} />
-            <Button variant="outlined" onClick={handleClick}>
+            <Header style={{minWidth: "500px"}} h1={h1} rerenderParentCallback={rerenderParentCallback} />
+            <Button style={{ margin: '.5em' }} variant="outlined" onClick={handleClick}>
               Add
             </Button>
           </div>
