@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import CloudDoneSharpIcon from '@material-ui/icons/CloudDoneSharp';
 import CloudOffSharpIcon from '@material-ui/icons/CloudOffSharp';
@@ -15,6 +16,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import StopIcon from '@material-ui/icons/Stop';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +38,32 @@ const InteractiveList = (props) => {
   const handleDelete = (e) => {
       const newList = renderedList.filter((item) => item.id !== parseInt(e.currentTarget.id));
       setRenderedList(newList);
+  }
+  const [intervalActive, setIntervalActive] = useState(false);
+  const launch = useRef();
+
+  const handlePlay = async (e, row) => {
+    console.log(e.currentTarget.id);
+      console.log('axios calls started');
+      clearInterval(launch.current)
+      launch.current = setInterval(function(){ 
+        setIntervalActive(true);
+        axios(row.endPoint).then(
+          (res) => {
+            console.log(res);
+            if(res.status === 200) {
+              row.status = 'ok';
+            } else {
+              row.status = 'error';
+            }
+          }
+        )
+      }, 3000);
+  }
+  const handleStop = (e) => {
+      clearInterval(launch.current);
+      console.log('stopped axios calls')
+      setIntervalActive(false);
   }
 
   const history = useHistory();
@@ -61,6 +90,12 @@ const InteractiveList = (props) => {
                                               <TableCell align="left">{row.type}</TableCell>
                                               <TableCell align="left">{row.name}</TableCell>
                                               <TableCell align="left">{row.status}</TableCell>
+                                              <TableCell align="right">
+                                                <IconButton edge="end" id={row.id} aria-label="delete">
+                                                    {!intervalActive && <PlayArrowIcon onClick={(e) => handlePlay(e,row)} id='play' color="primary" />}
+                                                    {intervalActive && <StopIcon onClick={(e) => handleStop(e,row)} id='stop' color="primary" />}
+                                                </IconButton>
+                                              </TableCell>
                                               <TableCell align="right">
                                                 <IconButton onClick={handleDelete} edge="end" id={row.id} aria-label="delete">
                                                     <DeleteIcon color="secondary" />
