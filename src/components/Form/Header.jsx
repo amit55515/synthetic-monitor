@@ -98,14 +98,14 @@ const Header = (props) => {
               <TextField
                 label="Header 1"
                 value={header1}
-                style={{minWidth: "500px"}}
+                style={{minWidth: "500px", margin: '0.5em'}}
                 onChange={handleheaderOne}
               />
               <Button
                 aria-describedby={id1}
                 variant="outlined"
                 color="primary"
-                style={{ marginTop: '.5em' }}
+                style={{ margin: '0.5em' }}
                 onClick={openHeader}
               >
                 Select Headers

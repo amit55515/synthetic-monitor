@@ -21,12 +21,12 @@ function NewApiForm(props) {
   }
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-      <Switch
+      {/* <Switch
         checked={checked}
         onChange={handleChange}
         color="primary"
         inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
+      /> */}
       <DialogTitle id="simple-dialog-title">{swagger ? 'Add Swagger URl' : 'Add new end Point' }</DialogTitle>
         <Form swagger={swagger} setList={props.setList} renderList={props.renderList} handleClose={handleClose} parentCallback={props.parentCallback} />
     </Dialog>

@@ -3,24 +3,30 @@ import AppBar from '../AppBar/AppBar';
 import InteractiveList from '../ListComponent/List';
 
 const MainPage = () => {
-    const mockData = [
+    const mockEndPoints = [
         {
             id: 1,
-            endPoint: 'api1',
+            type: 'Get',
+            name: 'Films',
+            endPoint: 'https://ghibliapi.herokuapp.com/films',
             status: 'ok'
         },
         {
             id:2,
-            endPoint: 'api2',
+            type: 'Get',
+            name: 'people',
+            endPoint: 'https://ghibliapi.herokuapp.com/people',
             status: 'recovering'
         },
         {
             id:3,
-            endPoint: 'api3',
+            type: 'Get',
+            name: 'locations',
+            endPoint: 'https://ghibliapi.herokuapp.com/locations',
             status: 'error'
         }
     ]
-    const [renderList, setList] = useState(mockData);
+    const [renderList, setList] = useState(mockEndPoints);
     const parentCallback = () => {
         console.log('parentrerender');
     }
