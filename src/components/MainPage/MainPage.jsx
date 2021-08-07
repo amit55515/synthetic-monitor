@@ -1,32 +1,11 @@
 import React, {useState} from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
 import AppBar from '../AppBar/AppBar';
 import InteractiveList from '../ListComponent/List';
 
 const MainPage = () => {
-    const mockEndPoints = [
-        {
-            id: 1,
-            type: 'Get',
-            name: 'Films',
-            endPoint: 'https://ghibliapi.herokuapp.com/films',
-            status: 'ok'
-        },
-        {
-            id:2,
-            type: 'Get',
-            name: 'people',
-            endPoint: 'https://ghibliapi.herokuapp.com/people',
-            status: 'recovering'
-        },
-        {
-            id:3,
-            type: 'Get',
-            name: 'locations',
-            endPoint: 'https://ghibliapi.herokuapp.com/locations',
-            status: 'error'
-        }
-    ]
-    const [renderList, setList] = useState(mockEndPoints);
+    const apiList = useSelector(state => state.apiList, shallowEqual);
+    const [renderList, setList] = useState(apiList);
     const parentCallback = () => {
         console.log('parentrerender');
     }
