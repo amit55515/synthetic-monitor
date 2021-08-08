@@ -3,13 +3,18 @@ import React, { useState } from 'react';
 import {
   TextField, Button
 } from '@material-ui/core';
+import { useSelector, shallowEqual } from 'react-redux';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Header from './Header';
+import { updateApiList } from '../../actions/index';
+import { useDispatch } from 'react-redux';
 
 function Form (props) {
+      const apiList = useSelector(state => state.apiList, shallowEqual);
+      const dispatch = useDispatch();
       const [URL, setURL] = useState('');
       const [name, setName] = useState('');
       const [rqstType, setRqstType] = useState('GET');
@@ -34,17 +39,16 @@ function Form (props) {
 
     const handleClick = () => {
       const formObject = {};
-      formObject.id = props.renderList[props.renderList.length-1].id + 1;
+      formObject.id = apiList[apiList.length-1].id + 1;
       formObject.type = rqstType;
       formObject.name = name;
       formObject.endPoint = URL;
       formObject.params = param1;
       formObject.headers = h1;
-      console.log(formObject);
-      const List = props.renderList;
-      List.push(formObject);
-      props.setList(List);
-      props.parentCallback();
+      formObject.current = false;
+      const newList = apiList.slice();
+      newList.push(formObject);
+      dispatch(updateApiList(newList));
       props.handleClose();
     }
 

@@ -6,6 +6,7 @@ export const mockEndPoints = [
         type: 'Get',
         name: 'Films',
         endPoint: 'https://ghibliapi.herokuapp.com/films',
+        current: false,
         status: 'ok'
     },
     {
@@ -13,6 +14,7 @@ export const mockEndPoints = [
         type: 'Get',
         name: 'people',
         endPoint: 'https://ghibliapi.herokuapp.com/people',
+        current: false,
         status: 'recovering'
     },
     {
@@ -20,6 +22,7 @@ export const mockEndPoints = [
         type: 'Get',
         name: 'locations',
         endPoint: 'https://ghibliapi.herokuapp.com/locations',
+        current: false,
         status: 'error'
     }
   ]
