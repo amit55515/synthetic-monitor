@@ -7,7 +7,9 @@ export const mockEndPoints = [
         name: 'Films',
         endPoint: 'https://ghibliapi.herokuapp.com/films',
         current: false,
-        status: 'ok'
+        status: 'ok',
+        successHits: 0,
+        failHits: 0
     },
     {
         id:2,
@@ -15,7 +17,9 @@ export const mockEndPoints = [
         name: 'people',
         endPoint: 'https://ghibliapi.herokuapp.com/people',
         current: false,
-        status: 'recovering'
+        status: 'recovering',
+        successHits: 0,
+        failHits: 0
     },
     {
         id:3,
@@ -23,6 +27,8 @@ export const mockEndPoints = [
         name: 'locations',
         endPoint: 'https://ghibliapi.herokuapp.com/locations',
         current: false,
-        status: 'error'
+        status: 'error',
+        successHits: 0,
+        failHits: 0
     }
   ]

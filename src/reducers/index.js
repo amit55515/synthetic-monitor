@@ -26,7 +26,8 @@ const apiList = (state = mockEndPoints, action) => {
     if (type === UPDATE_API_STATUS_RUNNING) {
       const data1 = JSON.parse(JSON.stringify(data))
       data1.current = true;
-      axios(data1.endPoint).then(
+      try {
+        axios(data1.endPoint).then(
           (res) => {
             console.log(data1.id , res.data)
             if(res.status === 200) {
@@ -36,6 +37,10 @@ const apiList = (state = mockEndPoints, action) => {
             }
           }
         )
+      } catch(err) {
+        console.log(err);
+        data1.status = 'error'
+      }
         let newState = state.slice();;
         for(let i=0; i<newState.length;i++) {
           if(newState[i].id === data1.id) {

@@ -46,6 +46,7 @@ function Form (props) {
       formObject.params = param1;
       formObject.headers = h1;
       formObject.current = false;
+      formObject.status = 'error';
       const newList = apiList.slice();
       newList.push(formObject);
       dispatch(updateApiList(newList));

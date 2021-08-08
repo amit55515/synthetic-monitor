@@ -54,14 +54,12 @@ const InteractiveList = (props) => {
       clearInterval(launch.current)
       launch.current = setInterval(function(){
         dispatch(updateApiStatusRunning(row));
-        // dispatch(updateApiList(row));
       }, 3*1000);
   }
   const handleStop = (e, row) => {
       clearInterval(launch.current);
       console.log('stopped axios calls')
       dispatch(updateApiStatusStopped(row));
-      // dispatch(updateApiList(row));
   }
 
   const history = useHistory();
