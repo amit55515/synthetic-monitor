@@ -96,7 +96,7 @@ const Header = (props) => {
               style={{ margin: '.5em' }}
             >
               <TextField
-                label="Header 1"
+                label="Header"
                 value={header1}
                 style={{minWidth: "500px", margin: '0.5em'}}
                 onChange={handleheaderOne}

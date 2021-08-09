@@ -17,11 +17,15 @@ function Form (props) {
       const dispatch = useDispatch();
       const [URL, setURL] = useState('');
       const [name, setName] = useState('');
+      const [data, setData] = useState('');
       const [rqstType, setRqstType] = useState('GET');
       const [param1, setParam1] = useState('{"rollUpVariants":"true"}');
       const [h1, seth1] = useState({});
       const handleDomainName = (e) => {
         setName(e.target.value);
+      }
+      const handleData = (e) => {
+        setData(e.target.value);
       }
       const handleDomain1 = (e) => {
         setURL(e.target.value);
@@ -47,6 +51,8 @@ function Form (props) {
       formObject.headers = h1;
       formObject.current = false;
       formObject.status = 'error';
+      formObject.data = data;
+      console.log(formObject);
       const newList = apiList.slice();
       newList.push(formObject);
       dispatch(updateApiList(newList));
@@ -112,12 +118,24 @@ function Form (props) {
               style={{ margin: '.5em' }}
             >
               <TextField
-                label="Param 1"
+                label="Param"
                 handleChange={handleParam1}
                 value={param1}
                 style={{minWidth: "500px", margin: '0.5em'}}
               />
             </div>
+            {rqstType !== 'GET' &&
+              <FormControl
+                  style={{minWidth: "500px" , margin: '1em'}}
+                >
+                  <TextField
+                      placeholder="Data"
+                      id="demo-simple-select"
+                      value={data}
+                      onChange={handleData}
+                  />
+                </FormControl>
+            }
             <Header style={{minWidth: "500px"}} h1={h1} rerenderParentCallback={rerenderParentCallback} />
             <Button style={{ margin: '1em' }} variant="outlined" onClick={handleClick}>
               Add
